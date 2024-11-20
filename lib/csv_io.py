@@ -12,11 +12,11 @@ def create_csv(outname):
         pass
     f = open(outname,'a')
     #line = ("#,title,Link (URL/PID),Link to repository,creator,description")
-    line = ("#,title,Link (URL/PID),Link to repository,creator,license,contact,documentation link,related project,first commit date,semantic expressivity,description")
+    line = ("#,title,Link (URL/PID),Link to repository,creator,license,contact,documentation link,related project,first commit date,last commit date,description")
     f.write(line)
     f.close()
 
-def add_to_csv(outname,url,title,creator,gitlink,descr,license,contact,documentation,proj,firstComm,semanticExp):
+def add_to_csv(outname,url,title,creator,gitlink,descr,license,contact,documentation,proj,firstComm,lastComm):
     maxlen=200
     f = open(outname,'r')    
     count = sum(1 for line in f)
@@ -37,7 +37,7 @@ def add_to_csv(outname,url,title,creator,gitlink,descr,license,contact,documenta
     line += documentation.replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace(',', ';')+","
     line += proj.replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace(',', ';')+","
     line += firstComm+","
-    line += semanticExp+","
+    line += lastComm+","
 
     descr = descr.replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace(',', ';')
     if (len(descr)>maxlen):
