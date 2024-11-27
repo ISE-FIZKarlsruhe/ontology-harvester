@@ -63,7 +63,7 @@ The second argument is arbitrary and specify the filename with information about
       - first and last commit to the repository.
       - if the filename contains any of [base, simple, inferred, edit, full, import, export], with "_" or "-" at the beginning, we add this info into the "ontology type" column.
         
-    Next we use Microsoft OpenAI to parse README.md and LICENCE files (if exist) for the following columns:
+    Next we use Microsoft OpenAI (API key is needed) to parse README.md and LICENCE files (if exist) for the following columns:
     
       - contact information,
       - documentation link,
