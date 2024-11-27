@@ -2,7 +2,7 @@ This is a Python tool to scan GitHub repositories and extract data from the onto
 
 # Table of Contents  
 
-[How to use](#Description)  
+[How to use](#How_to_use)  
 
 [Description](#Description)  
 
