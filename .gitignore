@@ -53,5 +53,8 @@ $RECYCLE.BIN/
 .ipynb_checkpoints
 lib\__pycache__
 *Copy*
-
+Downloads
+*test*
+my_ai_API.txt
+*csv*
 

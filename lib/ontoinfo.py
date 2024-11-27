@@ -12,17 +12,20 @@ import os
 import glob
 import re
 
+
 ext_list = ["trix","ttl","turtle","trig","owl","rdf","n3","xml",
             "json","hext","html","nq","nt","ntriples","xsd",
             "jsd","rj","obo",".omn"]
 
 classes = prepareQuery("SELECT ?entity ?class WHERE {?entity a ?class}") 
-onto_lit=rdflib.term.URIRef('http://www.w3.org/2002/07/owl#Ontology')
+onto_lit =rdflib.term.URIRef('http://www.w3.org/2002/07/owl#Ontology')
 title_pur = rdflib.term.URIRef('http://purl.org/dc/terms/title')
 creator_pur = rdflib.term.URIRef('http://purl.org/dc/terms/creator')
 descript_pur = rdflib.term.URIRef('http://purl.org/dc/terms/description')
 abstract_pur =  rdflib.term.URIRef('http://purl.org/dc/terms/abstract')
 descr2 =  rdflib.term.URIRef('http://purl.org/dc/elements/1.1/description')
+verq  = prepareQuery("SELECT ?s ?p ?o WHERE {?s owl:versionIRI ?o}")
+verq2  = prepareQuery("SELECT ?s ?p ?o WHERE {?s owl:versionInfo ?o}")
 allq  = prepareQuery("SELECT ?s ?p ?o WHERE {?s ?p ?o}")
 
 def path2url(path):
@@ -104,9 +107,10 @@ def extract_info(filename,lastname):
         if (row.p==descr2):
             descands.append(row)
     
-    result = ["" for i in range(5)]      
+    result = ["" for i in range(7)]      
     try:
         print(names[0])
+        print(titles[0])
         result[0]=names[0]
     except:
         print("no name")
@@ -139,5 +143,31 @@ def extract_info(filename,lastname):
     result[3]=gitlink
     print (gitlink)
 
+    #version info
+    vers=""
+    qres = emtest.query(verq)
+    for row in qres:
+        if (row.s==names[0]):
+            vers=row.o
+    if (vers==""):
+        qres = emtest.query(verq2)
+        for row in qres:
+            if (row.s==names[0]):
+                vers=row.o
+                
+    result[5]=vers.strip()
+
+    #module info
+    result[6]=""
+
+    print("tit="+result[1])
+    if ("modules" in result[1]) == False:  #module in title
+        if ("module" in result[1]) | ("Module" in result[1]):
+            result[6]="module"
+
+    if ("modules" in result[4]) == False:   #module in description
+        if ("module" in result[4]) | ("Module" in result[4]):
+            result[6]="module"
+    
     return result
     

@@ -12,11 +12,11 @@ def create_csv(outname):
         pass
     f = open(outname,'a')
     #line = ("#,title,Link (URL/PID),Link to repository,creator,description")
-    line = ("#,title,Link (URL/PID),Link to repository,creator,license,contact,documentation link,related project,first commit date,last commit date,description")
+    line = ("#,title,Link (URL/PID),Link to repository,creator,license,contact,documentation link,related project,first commit date,last commit date, version, module, branch, type,extension, description")
     f.write(line)
     f.close()
 
-def add_to_csv(outname,url,title,creator,gitlink,descr,license,contact,documentation,proj,firstComm,lastComm):
+def add_to_csv(outname,url,title,creator,gitlink,descr,license,contact,documentation,proj,firstComm,lastComm,vers,module,branch,otype,extens):
     maxlen=200
     f = open(outname,'r')    
     count = sum(1 for line in f)
@@ -38,7 +38,12 @@ def add_to_csv(outname,url,title,creator,gitlink,descr,license,contact,documenta
     line += proj.replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace(',', ';')+","
     line += firstComm+","
     line += lastComm+","
-
+    line += vers+","
+    line += module+","
+    line += branch+","
+    line += otype+","
+    line += extens+","
+    
     descr = descr.replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace(',', ';')
     if (len(descr)>maxlen):
         descr = descr[:maxlen]
