@@ -60,7 +60,6 @@ The second argument is arbitrary and specify the filename with information about
       - path to the file on the GitHub,
       - file extension,
       - branch of the repository containing this file,
-      - first and last commit to the repository.
       - if the filename contains any of [base, simple, inferred, edit, full, import, export], with "_" or "-" at the beginning, we add this info into the "ontology type" column.
         
     Next we use Microsoft OpenAI (API key is needed) to parse README.md and LICENCE files (if exist) for the following columns:
@@ -71,6 +70,13 @@ The second argument is arbitrary and specify the filename with information about
       - license information.
    
   - the line is appended to the CSV file. It is created if not existing at the start of the script.
+ 
+  Also, the csv-file for git repositories is created to store the information about the repositories, having the following columns:
+  - link to the repository
+  - list of branches
+  - number of rdf-like files (files with triplets)
+  - number of ontology files (describing an ontology)
+  - first and last commit to the repository.
 
 # Contact
 
