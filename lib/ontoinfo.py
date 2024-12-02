@@ -18,7 +18,7 @@ ext_list = ["trix","ttl","turtle","trig","owl","rdf","n3","xml",
             "jsd","rj","obo",".omn"]
 
 classes = prepareQuery("SELECT ?entity ?class WHERE {?entity a ?class}") 
-onto_lit =rdflib.term.URIRef('http://www.w3.org/2002/07/owl#Ontology')
+onto_lit = rdflib.term.URIRef('http://www.w3.org/2002/07/owl#Ontology')
 title_pur = rdflib.term.URIRef('http://purl.org/dc/terms/title')
 creator_pur = rdflib.term.URIRef('http://purl.org/dc/terms/creator')
 descript_pur = rdflib.term.URIRef('http://purl.org/dc/terms/description')

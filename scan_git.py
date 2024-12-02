@@ -58,19 +58,21 @@ print("Clone path: " + str(folder))
 
 prefix="https://github.com/"
 prefix+="/"+user+"/"
-clone_subfold="/"+user+"/"+repname
 
 names_to_clone = [repname]
 if (repname==""):
-    names_to_clone = gitcrawl.get_user_repos(user)
+    auth = Auth.Token("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")
+    g = Github(auth=auth)
+    names_to_clone = list(gitcrawl.get_user_repos(user,g))
 
 for repo in names_to_clone:
-    print("cloning " + repo)
+    clone_subfold="/"+user+"/"+repo
     try:
+        print("cloning " + repo)
         myrep = gitcrawl.clone_repo(folder,user,repo)
-    except:
-        print("this repository is already cloned")
-        pass
+        print("cloned")
+    except Exception as inst:
+                print(inst)  
     
     myrep = Repository(folder+clone_subfold)
 
@@ -82,6 +84,7 @@ for repo in names_to_clone:
 
     pre_bra = "refs/remotes/origin/"
     pre_tag ="refs/tags/"
+    #print(list(myrep.references));
 
     for branch in list(myrep.references):
         if (pre_bra in branch):
@@ -96,10 +99,12 @@ for repo in names_to_clone:
             if (branch[len(pre_bra):] == "refs"):
                 continue
             branches.append(branch[len(pre_bra):])
+       
             try:
                 Repo.clone_from(prefix+repo, folder+clone_subfold+"/more_branches/"+branches[-1],branch=branches[-1])
-            except:
-                pass
+            except Exception as inst:
+                print(inst)   
+
         elif pre_tag in branch:
             tags.append(branch[len(pre_tag):]) 
 
