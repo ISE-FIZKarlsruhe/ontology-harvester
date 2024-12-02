@@ -72,10 +72,10 @@ The second argument is arbitrary and specify the filename with information about
   - the line is appended to the CSV file. It is created if not existing at the start of the script.
  
   Also, the csv-file for git repositories is created to store the information about the repositories, having the following columns:
-  - link to the repository
-  - list of branches
-  - number of rdf-like files (files with triplets)
-  - number of ontology files (describing an ontology)
+  - link to the repository,
+  - list of branches,
+  - number of rdf-like files (files with triplets),
+  - number of ontology files (describing an ontology),
   - first and last commit to the repository.
 
 # Contact
