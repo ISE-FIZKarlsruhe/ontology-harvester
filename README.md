@@ -77,6 +77,9 @@ The second argument is arbitrary and specify the filename with information about
   - number of rdf-like files (files with triplets),
   - number of ontology files (describing an ontology),
   - first and last commit to the repository.
+ 
+  ### Batch scanning
+  The file "scan_user_list.py" takes all names of the git users from the file "MSE_ontologies.xlsx - All ontologies.csv" and clones all repositories of these users.
 
 # Contact
 
