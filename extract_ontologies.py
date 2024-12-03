@@ -80,7 +80,7 @@ def get_ai_model():
     from openai import AzureOpenAI
     ai_client = AzureOpenAI(
       azure_endpoint = "https://my-east.openai.azure.com/", 
-      api_key="b3939bc5b9aa4e6ca25aedf0e8ce0700",   
+      api_key="TOKEN",   
       api_version="2023-05-15"
     )
 

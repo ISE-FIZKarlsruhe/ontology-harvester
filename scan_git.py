@@ -61,7 +61,7 @@ prefix+="/"+user+"/"
 
 names_to_clone = [repname]
 if (repname==""):
-    auth = Auth.Token("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")
+    auth = Auth.Token("TOKEN")
     g = Github(auth=auth)
     names_to_clone = list(gitcrawl.get_user_repos(user,g))
 
