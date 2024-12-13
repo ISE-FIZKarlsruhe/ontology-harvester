@@ -26,7 +26,7 @@ def add_to_repo_csv(outname,link,branch_list,onto_num,rdf_num,firstComm,lastComm
     line+=","
    # for branch in branch_list:
    #     line+=branch+"; "
-    line+=","
+   # line+=","
     line += str(onto_num)+"," 
     line += str(rdf_num)+"," 
     line += firstComm+","

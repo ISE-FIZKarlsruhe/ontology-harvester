@@ -198,7 +198,7 @@ for user in user_folders:
                 if (n_onto>=0):
                     if (gitlink not in gitlinks):
                         gitlinks.append(gitlink)
-                        csv_io.add_to_repo_csv(routname,gitlink,branches,n_onto,n_rdf,inidate,lastdate)
+                        csv_io.add_to_repo_csv(routname,gitlink,branches,n_onto,n_rdf-n_onto,inidate,lastdate)
 
             except:
                     print("repo failed to be processed")
