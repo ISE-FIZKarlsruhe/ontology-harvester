@@ -56,5 +56,9 @@ lib\__pycache__
 Downloads
 *test*
 my_ai_API.txt
-*csv*
+*.csv
+*.tsv
+Input*
+Output*
+Old_downloads
 

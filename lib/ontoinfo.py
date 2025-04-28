@@ -96,9 +96,13 @@ def extract_info(filename,lastname):
             names.append(row.s)
         if (row.p==title_pur):
             titles.append(row.o)
+            #print("TITCAND=")
+            #print(row)
         if (row.p==descript_pur):
             descrs.append(row.o)
         if (row.p==creator_pur):
+            #print("CREATOR_=")
+            #print(row)
             creators.append(row.o)
         if (row.p==descript_pur):
             descands.append(row)
@@ -131,17 +135,23 @@ def extract_info(filename,lastname):
 
         
     if (len(titles)>0):
-        print(titles[0])
+        print("TITLE=")#+titles[0])
+        print(titles)
         result[1]=titles[0]
     if (len(creators)>0):
-        result[2]=creators[0]
-        print(creators[0])
+        for c in creators: 
+            result[2]+=c
+            result[2]+="; "
+        result[2]=result[2][:-2] 
+        #print("CREAT="+creators[0])
     if (len(descrs)>0):
+        print("DESCRIPT=")#+descrs[0])
+        print(descrs)
         result[4]=descrs[0]
     
     gitlink="https://github.com" + lastname
     result[3]=gitlink
-    print (gitlink)
+   # print (gitlink)
 
     #version info
     vers=""

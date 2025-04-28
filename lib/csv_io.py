@@ -10,10 +10,10 @@ def create_repos_csv(outname):
     except:
         pass
     f = open(outname,'a')
-    line = ("#,link,list of branches,number of ontology files, number of non-ontology rdf-like files, first commit, last commit")
+    line = ("#,link,number of ontology files, number of non-ontology rdf-like files, first commit, last commit")
     f.write(line)
     f.close()
-def add_to_repo_csv(outname,link,branch_list,onto_num,rdf_num,firstComm,lastComm):
+def add_to_repo_csv(outname,link,onto_num,rdf_num,firstComm,lastComm):
     f = open(outname,'r')    
     count = sum(1 for line in f)
     f.close()     
@@ -21,12 +21,6 @@ def add_to_repo_csv(outname,link,branch_list,onto_num,rdf_num,firstComm,lastComm
     num = count
     line = "\n"+str(count)+","
     line += link+","
-    for branch in branch_list:
-        line+=branch+"; "
-    line+=","
-   # for branch in branch_list:
-   #     line+=branch+"; "
-   # line+=","
     line += str(onto_num)+"," 
     line += str(rdf_num)+"," 
     line += firstComm+","
@@ -46,7 +40,7 @@ def create_csv(outname):
     f.close()
 
 def add_to_csv(outname,url,title,creator,gitlink,filelink,descr,license,contact,documentation,proj,vers,module,branch,otype,extens):
-    maxlen=200
+    maxlen=4000
     f = open(outname,'r')    
     count = sum(1 for line in f)
     f.close()     
@@ -66,7 +60,11 @@ def add_to_csv(outname,url,title,creator,gitlink,filelink,descr,license,contact,
     line += contact.replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace(',', ';')+","
     line += documentation.replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace(',', ';')+","
     line += proj.replace('\n', ' ').replace('\r', '').replace('\t', ' ').replace(',', ';')+","
-    line += vers+","
+    #no linebreaks in version
+    vers_fixed = vers.split("\n")
+    #print("VERSION=")
+    #print(vers_fixed)
+    line += vers_fixed[0].replace(',', ';')+","
     line += module+","
     line += branch+","
     line += otype+","

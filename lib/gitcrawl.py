@@ -14,7 +14,7 @@ def get_user_repos(user,git):
     repos = user.get_repos()
     
     useful = []
-    for repo in user.get_repos():
+    for repo in repos:
         if repo.fork is False:
             useful.append(repo.name)
     
