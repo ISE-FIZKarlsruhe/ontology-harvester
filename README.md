@@ -184,56 +184,6 @@ Then we say that there is some agent and it is bearer of contact point and/or cr
 Returning to our teacher and father example: if we would use the class-based approach, i.e., declaring new individuals for teacher, father, driver, buyer and so on, then we would end up in a situation where many of these classes stand for one person. And if we want to specify, let's say, the name of that person we would need to do this for all of these classes, unecessarily multiplying the object properties, pointing to the name. And how to clearly distinguish between the situations when the buyer, teacher, and father are and are not the one person? This is further complicated by the fact that in different situations this person can be called by different names at home or at school, so comparison of the names is not that straightforward. 
 The role-based pattern on the other hand helps to solve this problem by correctly modeling this aspect of reality: actually there is a person that bears the role which is realized in a particular situation (process). This way, we use the following schema:
 
-## Harvester tool description
-
-To facilitate the collection and structuring of information about ontologies do you use the automated 2 so-called GitHub repository harvester. It scans the repository checks the LDF containing files if any of them are apologies and then extracts the corresponding information which is to be put into the MSE knowledge graph. Some data curation of the automated output is still necessary however it is very minor part of work compared to the whole process this way it is by 90-95% automatized.
-
-TOC harvester:
-- schema pic
-- download github
-- query rdf files
-- rdf -> csv file expl (title, descr, creators, ...)
-- csv -> onto expl (from guide, alternative to human work)
-
-### 1. Cloning repositories:
-
-- forked repositories are ignored.
-  
-- main brach is cloned
-
-### 2. Scanning repositories for ontology files:
-
-- extensions list to be checked: ["trix","ttl","turtle","trig","owl","rdf","n3","xml","json","hext","html","nq","nt","ntriples","xsd","jsd","rj","obo",".omn"].
-
-- for each user and for each repository the corresponding folder is scanned for files with the above extensions. These are "ontology candidates" files.
-
-- for each ontology candidate file the test query is performed querying the list of classes. If success, it is a valid file for further actions. Otherwise skip the file.
-
-- since we are aiming for extracting the ontologies information, using the SPARQL querying (via rdflib library) we are searching for the (s,p,o) rdf-triples. First we search for the object:
-    - 'http://www.w3.org/2002/07/owl#Ontology', subject is the **ontology PID**. If it is NOT empty, we continue. Otherwise, skip the file.
-- then we search for the following predicates:
-    - 'http://purl.org/dc/terms/title', subject is the **ontology title**. If it is NOT empty, we continue. Otherwise, skip the file.
-    - 'http://purl.org/dc/terms/description', subject is the **ontology description**. If empty:
-      - 'http://purl.org/dc/terms/abstract', use subject (abstract) as the description. If empty:
-          - 'http://purl.org/dc/elements/1.1/description', use subject as the desciprtion.
-    - 'http://purl.org/dc/terms/creator', subject is the **ontology creator(s)**
-    - 'owl:versionIRI', subject is the **version description**. If empty:
-        - 'owl:versionInfo', subject is the version description.
-     
-  - any of the above fields can be empty except title and PID of the ontology.
-  - unique id for onto is PID
- 
-  - next we create a line in the CSV file corresponding to the ontology file, adding the following columns:
-      - **path to the file** on the GitHub,
-      - **file extension**,
-      - if the filename contains any of [base, inferred, edit, full], with "_" or "-" at the beginning, we add this info into the "**variant**" column.
-        
-    Next we use Microsoft OpenAI (API key is needed) to parse README.md and LICENCE files (if exist) for the following columns:
-    
-      - contact information,
-      - documentation link
-
-
 ## Class definitions
 
 Ontology - An (nfdi) ontology is a data item that coherently represents all components of an ontology, including its versions, variants, modules and other associated artifacts. It is typically denoted by a name and/or an acronym, which is the term we use to communicate about it.An (nfdi) ontology is a data item that coherently represents all components of an ontology, including its versions, variants, modules and other associated artifacts. It is typically denoted by a name and/or an acronym, which is the term we use to communicate about it.
