@@ -54,11 +54,11 @@ $RECYCLE.BIN/
 lib\__pycache__
 *Copy*
 Downloads
+Old_downloads
 *test*
 my_ai_API.txt
 *.csv
 *.tsv
-Input*
-Output*
-Old_downloads
+Input
+Output
 
