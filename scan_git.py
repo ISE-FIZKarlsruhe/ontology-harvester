@@ -61,11 +61,11 @@ prefix+="/"+user+"/"
 
 names_to_clone = [repname]
 if (repname==""):
-    auth = Auth.Token("TOKEN")
+    auth = Auth.Token("XXXX")
     g = Github(auth=auth)
     names_to_clone = list(gitcrawl.get_user_repos(user,g))
 
-for repo in names_to_clone:
+for repo in names_to_clone[:]:
     clone_subfold="/"+user+"/"+repo
     try:
         print("cloning " + repo)
@@ -73,7 +73,8 @@ for repo in names_to_clone:
         print("cloned")
     except Exception as inst:
                 print(inst)  
-    
+    #don't touch branches
+    continue
     myrep = Repository(folder+clone_subfold)
 
     defbranch = myrep.head.shorthand

@@ -80,13 +80,14 @@ def get_ai_model():
     from openai import AzureOpenAI
     ai_client = AzureOpenAI(
       azure_endpoint = "https://my-east.openai.azure.com/", 
-      api_key="TOKEN",   
+      api_key="XXX",   #add your own key
       api_version="2023-05-15"
     )
 
     #modelName="Microsoft.CognitiveServicesOpenAI-20240111194907"
     #deployment_name='gpt-35'
-    return ai_client
+    #return ai_client       
+    return []  #uncomment above for ai usage
 
 try:
     my_ai = get_ai_model()
@@ -146,7 +147,7 @@ for user in user_folders:
                                 inds = [x.start() for x in re.finditer('/',x)] #indexe of "/"
                                 ind=inds[2]                     
                                 branch = Repository(folder + x[:ind]).head.shorthand
-                                print(x)
+                                print("head="+x)
                                 if ("more_branches" in fi):
                                     s_ind = inds[3]
                                     e_ind = inds[4]
@@ -160,7 +161,7 @@ for user in user_folders:
                                 if (branch not in branches):
                                     branches.append(branch)
 
-                                print(filelink)
+                               # print(filelink)
 
                                 just_filename=x[inds[-1]+1:]
                                 print(just_filename)
@@ -189,7 +190,7 @@ for user in user_folders:
 
                                 #extract information from ontology file
                                 oinfo_fill = ontoinfo.extract_info(fi,filelink)   
-                                print(oinfo_fill)
+                              #  print(oinfo_fill)
                                 #add to the csv file
                                 if (oinfo_fill!=[]):
                                         n_onto+=1
@@ -198,8 +199,9 @@ for user in user_folders:
                 if (n_onto>=0):
                     if (gitlink not in gitlinks):
                         gitlinks.append(gitlink)
-                        csv_io.add_to_repo_csv(routname,gitlink,branches,n_onto,n_rdf,inidate,lastdate)
+                        csv_io.add_to_repo_csv(routname,gitlink,n_onto,n_rdf-n_onto,inidate,lastdate)
 
-            except:
-                    print("repo failed to be processed")
+            except Exception as inst:
+                    print(inst)  
+
                     continue 
