@@ -1,0 +1,1 @@
+java  -jar C:\Windows\robot.jar template --merge-before --input .\nfdicore-full.owl --template .\template.tsv --output nfdi-out-tsv.owl

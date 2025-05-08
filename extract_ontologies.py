@@ -25,7 +25,7 @@ import gitcrawl
 # Instantiate the parser
 parser = argparse.ArgumentParser(description='Scans all the repositories inside the folder and outputs a CSV file with found ontologies')
 
-# Required positional argument - git user name
+# Required positional argument - folder argument
 parser.add_argument('folder_arg', type=str,
                     help='A required string argument - folder with clones repositories')
 # Optional argument
