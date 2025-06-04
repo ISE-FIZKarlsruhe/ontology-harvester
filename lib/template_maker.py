@@ -12,7 +12,7 @@ hide_labels=True
 
 
 creator_name="https://github.com/kgubaev/Github-Ontology-Harvester/releases/tag/"
-creator_version = "1.0"
+creator_version = "1.1"
 creator_date = datetime.today().strftime('%Y-%m-%d')
 
 namespace = "https://purls.helmholtz-metadaten.de/msekg/"
