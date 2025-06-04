@@ -76,7 +76,7 @@ for x in df['Short description'][:]:
 
 
 #sort by titles
-titles,uris,repolinks,filelinks,vers,variants,extens,descriptions,cpoints,creators,doclinks,licenses,acronyms,short_desc = zip(*sorted(zip(titles,uris,repolinks,filelinks,vers,variants,extens,descriptions,cpoints,creators,doclinks,licenses,acronyms,short_desc)))
+#titles,uris,repolinks,filelinks,vers,variants,extens,descriptions,cpoints,creators,doclinks,licenses,acronyms,short_desc = zip(*sorted(zip(titles,uris,repolinks,filelinks,vers,variants,extens,descriptions,cpoints,creators,doclinks,licenses,acronyms,short_desc)))
 
 titles = list(titles)
 uris = list(uris)
@@ -116,16 +116,19 @@ unique_vers=[]
 unique_vars=[]  #for version!
 unique_exts=[]  #for version + variant!
 
+print(str(len(titles)) + " titles total")
+
 for i in range(len(titles)):
   titles[i] = titles[i].replace(",",";").replace("\n","; ")
   short_desc[i] = short_desc[i].replace(",",";").replace("\n","; ")
   creators[i] =  creators[i].replace("<","(").replace(">",")").replace("[","(").replace("]",")").replace("{","(").replace("}",")")
   cpoints[i] =  cpoints[i].replace("<","(").replace(">",")").replace("[","(").replace("]",")").replace("{","(").replace("}",")")
+  #print("i: "+str(i))
   if (titles[i]==''):
            continue
     #if ((curr_title==titles[i]) | (curr_repo==repolinks[i])):      #within the same title = ontology class  
 
-   
+    ############
     #manual csv import, tailored for a limited number of columns: license, acronym, short_description
     ###########
   if (repolinks[i]==""):
@@ -137,25 +140,29 @@ for i in range(len(titles)):
         odk_lines.append(tm.get_ontology_title_namespace_descript_lines(curr_title,titles[i],"",short_desc[i],onto_id)[0])
 
         repolinks[i] = uris[i]
+        curr_repo = repolinks[i]  
         if (repolinks[i]!=""):
                 if (repolinks[i] not in tm.used_repos):
                                 [repo_line,repo_id] = tm.get_repository_line(onto_id,curr_title+" repository", curr_repo,"")
                                 odk_lines.append(repo_line)  #currently only main version
                                 tm.used_repos.append(repolinks[i])
                                 tm.used_repos_id.append(repo_id)
+                                #print("new repo for " + curr_title, "repo=" + repo_line)
                 else:
                         repo_id = tm.used_repos_id[tm.used_repos.index(repolinks[i])]
                         tm.get_repository_line(onto_id,curr_title+" repository", curr_repo,repo_id)
-                        print("reuse repo for " + curr_title)
+                        #print("reuse repo for " + curr_title)
     else:
             i = unique_titles.index(titles[i])
             id_reuse = id_titles[i]
             [onto_line,onto_id] = tm.get_ontology_line(curr_title,licenses[i],acronyms[i],id_reuse)
             odk_lines.append(onto_line)   #add onto line to odk
+            print("reuse  title for " + curr_title)
 ##############
     #main: harvester case
-#################
+################
   else:
+    #print("onto+repo: " + curr_title)
     line_vers = uris[i]
     if (line_vers==curr_vers):      
       i+=0                                                      
@@ -256,7 +263,7 @@ for i in range(len(titles)):
     #contact point
     if ((cpoints[i]!="") & (cpoints[i]!="no info") & ( (cpoints[i]!="no info "))):
            if (contact_id==""):
-                print("cp="+cpoints[i])
+                #print("cp="+cpoints[i])
                 [contact_line,contact_id,contact_role_id]=tm.get_contact_role_process_line(curr_title,onto_id,cpoints[i])                
                 odk_lines.append(contact_line)
                 if (contact_id!=""): #we have info about this contact already

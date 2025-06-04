@@ -66,6 +66,12 @@ def append_annotations(line):
         newline = line.replace("\n",annot_line)
         return newline
 
+def is_repo_or_website(name):
+        if (("https://github.com" in name) | ("https://gitlab.com" in name )):
+                return True
+        else:
+                return False
+
 def get_ontology_line(label,license="",acronym="",id_onto=""): #comment=label
         #license
        line=""
@@ -279,7 +285,12 @@ def get_repository_line(onto_id,label,repolink,repo_id): #comment=label, is_abou
        line=""
        line+=label+"," #comment
        line+=id+","
-       line+="https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000030," #type
+       
+       is_repository = is_repo_or_website(repolink)
+       if (is_repository):
+                line+="https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000030," #type source code repository
+       else:
+                line+="https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000223," #type website            
        line+=keep_label(label)+","
        line+=",," #empty columns
        line+=onto_id+",,"
@@ -613,7 +624,7 @@ def get_creator_role_process_line(filename,creator_of,information,process_id):  
         return [line,id_creator,id_process]
 
 def parse_personal_info(info):
-       print(info)
+      # print(info)
        if (info[0]==" "):
                 info=info[1:]
        if (info[-1]==" "):
