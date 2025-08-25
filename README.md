@@ -131,8 +131,6 @@ Ontologies with their versions and variants are avtually located in the files, h
 Each file has one extension, and to instantiate the extension object, we use subclasses of edam:rdf format (subclass of iao:data format specification) - e.g., turtle format. To connect data item with the extension object, we use nfdicore:has format property. 
 
 ### 3. Ontology repository, files and documentation links
-   
-![doc_files_url](https://github.com/user-attachments/assets/105c13cd-d07f-4ed3-8cb2-b04bbb7d7abc)
 
 Classes:
 * ``nfdicore:Source Code Repository``  <br/>
