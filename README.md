@@ -34,7 +34,7 @@ The second argument is arbitrary and specify the filename with information about
 python csv_to_odk.py 
 ```
 
-This takes as input the "Ontologies_MSE.csv" from the step 2 and outputs the "template.tsv" file, which is a ODK robot template, containing all the class instantiations, IRIs, and relations between the instances.
+This takes as input the "Ontologies_MSE.csv" from the step 2 and outputs the "template.tsv" file, which is a ODK robot (https://incatools.github.io/ontology-development-kit/) template, containing all the class instantiations, IRIs, and relations between the instances.
 
 ### 4. Asseting the extracted information into the ontology file:
 use the ODK robot tool (see the "robot.bat" file) to transform the template file from the previous step into the instances asserted into the "nfdicore-full.owl" file, which is the full version of NFDIcore 3.0 ontology (https://ise-fizkarlsruhe.github.io/nfdicore/).
