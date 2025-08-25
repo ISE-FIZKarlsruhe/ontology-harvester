@@ -145,7 +145,7 @@ Properties:
 * ``nfdicore:has url``  <br/>
 * ``obo:continuant part of``  <br/>
 
-Nowadays, GitHub is a cornerstone of data exchange, particularly in the context of software development and increasingly for other types of data and information. Ontology is not an exception and very often the ontology and its corresponding files either the triple files or corresponding documentation ATC leaves within contents of some GitHub (gitlab?) repository. Therefore is crucial to reflect this information in the ontology metadata schema. We use the NFDIcore class Source Code repository, since the principles of data organization share a lot in common between the organized collections of triplet file (ontology), and source code files.
+We use the NFDIcore class Source Code repository, since the principles of data organization share a lot in common between the organized collections of triplet file (ontology), and source code files.
 
 The ontology repository contains files with the triplets that are the essence of the ontology. While each ``nfdicore: File Data Item`` ``is about`` ontology and its variant objects, it is also ``obo:continuant part of`` the nfdicore:Source Code Repository object. In this way we specify the belongings of the files to the repository. As each file contains has its download link in parentheses GitHub repository address, we use dcat:download URL object property to connect the file to its link object, which is of the nfdicore:Website class.  if present we instantiate the nfdicore:Document object standing for the ontology documentation, which obo:is about the ontology object. 
 
@@ -176,11 +176,9 @@ Properties:
 * ``nfdicore: has contact point``  <br/>
 * ``obo:is about``  <br/>
 
-As ontology, in principle, should be always developing as a result of discussions with interested parties, developers and domain experts, maintaining connections to the relevant people is crucial. Therefore such information there as creator of ontology or a contact point of ontology is crucial to describe this type of semantic resource.
+
 To describe that particular person or an organization is a creator or a contact point of some ontology we use the so-called role pattern which is typical for the bfo-based ontologies. This means instead of the intuitively obvious solution to define a class of contact point / creator, and create a corresponding individual of that class, we do the following: instantiate the so-called roles which are specifically dependent continuants, which describe certain functions which, e.g., perrson plays in certain situation, for example the role of a father at home, or the role of a teacher at school. 
 Then we say that there is some agent and it is bearer of contact point and/or creator role, which is realized in contacting or creative process correspondingly. Ontology then participates in the corresponding process. As the shortcuts we have the corresponding properties has contact point and has creator which connect ontology to the corresponding agent. This approach solves the problem when one agent is creator and contact point of different ontologies. 
-Returning to our teacher and father example: if we would use the class-based approach, i.e., declaring new individuals for teacher, father, driver, buyer and so on, then we would end up in a situation where many of these classes stand for one person. And if we want to specify, let's say, the name of that person we would need to do this for all of these classes, unecessarily multiplying the object properties, pointing to the name. And how to clearly distinguish between the situations when the buyer, teacher, and father are and are not the one person? This is further complicated by the fact that in different situations this person can be called by different names at home or at school, so comparison of the names is not that straightforward. 
-The role-based pattern on the other hand helps to solve this problem by correctly modeling this aspect of reality: actually there is a person that bears the role which is realized in a particular situation (process). This way, we use the following schema:
 
 ## Class definitions
 
