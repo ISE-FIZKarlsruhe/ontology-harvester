@@ -71,6 +71,8 @@ The second argument is arbitrary and specify the filename with information about
       - related project info,
       - license information.
    
+    The above information is then verified while reviewing the CSV file.
+   
   - the line is appended to the CSV file. It is created if not existing at the start of the script.
  
   Also, the csv-file for git repositories is created to store the information about the repositories, having the following columns:
