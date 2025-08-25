@@ -28,6 +28,23 @@ python extract_ontologies.py folder_name --output_filename
 The first argument is mandatory which is the folder with cloned repositories from the previous script. Downloads should be specified by default.</br>
 The second argument is arbitrary and specify the filename with information about the found ontologies. Ontologies.csv is the default name.</br>
 
+### 3. Creatig the ODK robot template file (tsv), for the next step:
+
+```
+python csv_to_odk.py 
+```
+
+This takes as input the "Ontologies_MSE.csv" from the step 2 and outputs the "template.tsv" file, which is a ODK robot template, containing all the class instantiations, IRIs, and relations between the instances.
+
+### 4. Asseting the extracted information into the ontology file:
+use the ODK robot tool (see the "robot.bat" file) to transform the template file from the previous step into the instances asserted into the "nfdicore-full.owl" file, which is the full version of NFDIcore 3.0 ontology (https://ise-fizkarlsruhe.github.io/nfdicore/).
+
+Command should be modified according to your ODK/Java installation and looks like:
+```
+java  -jar C:\Windows\robot.jar template --merge-before --input .\nfdicore-full.owl --template .\template.tsv --output nfdi-out-tsv.owl
+```
+It produces the "nfdi-out-tsv.owl" file, containing the instances extracted from the clonned repositories, and asserted into the full version of the NFDIcore ontology.
+
 # Procedure description
 ### 1. Cloning repositories:
 
