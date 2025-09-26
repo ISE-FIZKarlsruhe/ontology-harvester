@@ -14,7 +14,7 @@ This is a Python tool to scan GitHub repositories and extract data from the onto
 ### 1. Cloning repositories for scanning:
 execute the scan_git.py file:
 ```
-python scan_git.py git_username --repository_name --clone_path
+python scan_git.py git_username --repo_name XXX --clone_path YYY
 ```
 The first argument is mandatory which is the Github username.</br>
 The second argument is arbitrary and specify the certain repository otherwise all user repositories are scanned.</br>
@@ -23,7 +23,7 @@ the third argument names the folder in which repositories will be cloned. By def
 ### 2. Scanning cloned repositories for the ontology files and extracting the info:
 execute the extract_ontologies.py file:
 ```
-python extract_ontologies.py folder_name --output_filename
+python extract_ontologies.py YYY --output_filename ZZZ
 ```
 The first argument is mandatory which is the folder with cloned repositories from the previous script. Downloads should be specified by default.</br>
 The second argument is arbitrary and specify the filename with information about the found ontologies. Ontologies.csv is the default name.</br>
