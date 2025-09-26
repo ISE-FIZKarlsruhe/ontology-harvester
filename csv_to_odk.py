@@ -15,12 +15,17 @@ import template_maker as tm
 tm.hide_labels=True
 tsv_prefer=True  #replaces commas to tabs, semicolons to commas also
 
-df = pd.read_csv("Ontologies_MSE.csv", encoding='unicode_escape', keep_default_na=False)
+inp_name=sys.argv[1]
+
+print("reading from " + inp_name)
+
+df = pd.read_csv(inp_name, keep_default_na=False)
 
 outname = "template.csv"
 if (tsv_prefer==True):
        outname="template.tsv"
 
+print(df.head())
 
 #url,title,creator,gitlink,filelink,descr,license,contact,documentation,proj,vers,module,branch,otype,extens
 
@@ -39,11 +44,8 @@ licenses=[]
 acronyms=[]
 short_desc=[]
 
-idpref="http://example.org/"
-idsuf=-1 #changes with new onto
-idpostf=0 #changes with each possible duplic. entity within onto
 
-maxlines = 2
+#L,Link inside repository,creator,license,contact,documentation link,related project, version, module, branch, type,extension, description
 
 for x in df['title'][:]:
         titles.append(x)
@@ -62,17 +64,27 @@ for x in df['extension'][:]:
 for x in df[' description'][:]:
         descriptions.append(x)
 for x in df['contact'][:]:
-        cpoints.append(x)
+        cpoints.append(x)    
 for x in df['creator'][:]:
-        creators.append(x)
+        creators.append(x)   
 for x in df['documentation link'][:]:
         doclinks.append(x)
-for x in df['License'][:]:
-        licenses.append(x)
-for x in df['Acronym'][:]:
-        acronyms.append(x)
-for x in df['Short description'][:]:
-        short_desc.append(x)
+
+#if manually added columns are present at human-readable csv file
+
+#for x in df['License'][:]:
+#        licenses.append(x)
+#for x in df['Acronym'][:]:
+#        acronyms.append(x)
+#for x in df['Short description'][:]:
+#        short_desc.append(x)
+
+#for compatibility, fill with empty if not upper case
+for i in range(len(titles)):
+	if (i >= len(licenses)):
+		licenses.append("")
+		acronyms.append("")
+		short_desc.append("")
 
 
 #sort by titles
@@ -118,9 +130,13 @@ unique_exts=[]  #for version + variant!
 
 print(str(len(titles)) + " titles total")
 
+[kg_ontos,kg_repos] = tm.get_mse_kg_ontologies()
+
+print("found ontologies in MSE KG:")
+print(kg_ontos)
+
 for i in range(len(titles)):
   titles[i] = titles[i].replace(",",";").replace("\n","; ")
-  short_desc[i] = short_desc[i].replace(",",";").replace("\n","; ")
   creators[i] =  creators[i].replace("<","(").replace(">",")").replace("[","(").replace("]",")").replace("{","(").replace("}",")")
   cpoints[i] =  cpoints[i].replace("<","(").replace(">",")").replace("[","(").replace("]",")").replace("{","(").replace("}",")")
   #print("i: "+str(i))
@@ -132,8 +148,13 @@ for i in range(len(titles)):
     #manual csv import, tailored for a limited number of columns: license, acronym, short_description
     ###########
   if (repolinks[i]==""):
+    continue             #skip
     #print(titles[i])
     curr_title = titles[i]      
+    try:
+       short_desc[i] = short_desc[i].replace(",",";").replace("\n","; ")
+    except:
+       pass
     if (titles[i] not in unique_titles):    
         [onto_line,onto_id] = tm.get_ontology_line(curr_title,licenses[i],acronyms[i])
         odk_lines.append(onto_line)   #add onto line to odk
@@ -197,7 +218,7 @@ for i in range(len(titles)):
         contact_id=""
         creatorS_id=""
         contact_role_id=""
-        idsuf+=1
+
         curr_repo = repolinks[i]       
         curr_title = titles[i]
         [onto_line,onto_id] = tm.get_ontology_line(curr_title,licenses[i],acronyms[i])
@@ -251,12 +272,6 @@ for i in range(len(titles)):
                 vers_title=""
 
         odk_lines.append(tm.get_ontology_version_variant_extension_line(titles[i],repo_id,onto_id,vers_title,var_title, filelinks[i],extens[i]))
-        #[ext_line,ext_id]=tm.get_ontology_extension_line(curr_title+" v. "+def_version + " " +variants[i] +"."+extens[i],repo_id,onto_id,vers_id,downl_id)
-        #print("addline " + vers_title+"_"+var_title+"_"+extens[i])
-        #odk_lines.append(ext_line)
-        #odk_lines.append(downl_line)
-        #odk_lines.append(tm.get_format_extension_lines(extens[i],ext_id)[0])
-        idpostf+=1
 
     
            
@@ -269,7 +284,7 @@ for i in range(len(titles)):
                 if (contact_id!=""): #we have info about this contact already
                         odk_lines.append(tm.get_contact_details_lines(curr_title,contact_id,contact_role_id,cpoints[i])[0])
 
-                idsuf+=1
+
 
 
     #creator
@@ -286,7 +301,6 @@ for i in range(len(titles)):
                         if (creator_id!=""): #we have info about this creator already
                                 odk_lines.append(tm.get_creator_details_lines(curr_title,creator_id,creator)[0])
 
-                        idsuf+=1
                         
            
 
