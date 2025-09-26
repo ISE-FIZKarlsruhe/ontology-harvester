@@ -12,7 +12,7 @@ hide_labels=True
 
 
 creator_name="https://github.com/kgubaev/Github-Ontology-Harvester/releases/tag/"
-creator_version = "1.1"
+creator_version = "1.2"
 creator_date = datetime.today().strftime('%Y-%m-%d')
 
 namespace = "https://purls.helmholtz-metadaten.de/msekg/"
@@ -48,7 +48,7 @@ def commastring(n):
 nprops=14 #number of object/data properties columns in csv template
 
 header1="comment,id,class (the type of the instance),label,has file format,is continuant part of,is about,download URL,nfdicore:has_url,nfdicore:has_value,nfdicore:contact_point_of,nfdicore:creator_of,bearer_of,has_realization,participates_in,concretizes,nfdicore:has_license,nfdicore:has_acronym,dcterms:creator, dcterms:created"
-header2=",ID,TYPE,LABEL,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000132,I http://purl.obolibrary.org/obo/BFO_0000176,I http://purl.obolibrary.org/obo/IAO_0000136 SPLIT=|,I http://www.w3.org/ns/dcat#downloadURL,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001007,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000113,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001028,I http://purl.obolibrary.org/obo/BFO_0000196,I http://purl.obolibrary.org/obo/BFO_0000054,I http://purl.obolibrary.org/obo/BFO_0000056,I http://purl.obolibrary.org/obo/BFO_0000059,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142,A https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0010015,A http://purl.org/dc/terms/creator,A http://purl.org/dc/terms/created"
+header2=",ID,TYPE,LABEL,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000132,I http://purl.obolibrary.org/obo/BFO_0000050,I http://purl.obolibrary.org/obo/IAO_0000136 SPLIT=|,I http://www.w3.org/ns/dcat#downloadURL,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001007,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000113,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001028,I http://purl.obolibrary.org/obo/RO_0000053,I http://purl.obolibrary.org/obo/BFO_0000054,I http://purl.obolibrary.org/obo/RO_0000056,I http://purl.obolibrary.org/obo/RO_0000059,I https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142,A https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0010015,A http://purl.org/dc/terms/creator,A http://purl.org/dc/terms/created"
 #header1="comment,id,class (the type of the instance),label,has part,is part of,is about,download URL,description"
 #header2=",ID,TYPE,LABEL,I http://purl.obolibrary.org/obo/BFO_0000051,I http://purl.obolibrary.org/obo/BFO_0000050,I http://purl.obolibrary.org/obo/IAO_0000136 SPLIT=|,I http://www.w3.org/ns/dcat#downloadURL,A http://purl.org/dc/terms/description SPLIT=|"
 header3="has value property,https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001007,data property,has_value" + commastring(nprops+2)
@@ -430,7 +430,93 @@ def get_contact_role_process_line(filename,contact_of,information):  #contact of
         line+=contact_of+",,,"#concretizes ontology
 
         return [line,id_contact,fill_id_role]
+        
+#query ontologies
+def get_mse_kg_ontologies():
+        sparql = SPARQLWrapper(
+        "https://nfdi.fiz-karlsruhe.de/matwerk/shmarql/"
+        )
+        sparql.setReturnFormat(JSON)
 
+        log=True
+        found_names=[]
+        found_repos=[]
+        #print("name="+first_name+family_name).
+        #print("mail="+email)
+        #print("orcid="+orcid)
+
+        query_start="""
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>	
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX virtrdfdata: <http://www.openlinksw.com/virtrdf-data-formats#>
+PREFIX virtrdf: <http://www.openlinksw.com/schemas/virtrdf#>
+PREFIX fabio: <http://purl.org/spar/fabio/>
+PREFIX swrl: <http://www.w3.org/2003/11/swrl#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX shmarql: <https://shmarql.com/>
+PREFIX cto: <https://nfdi4culture.de/ontology#>
+PREFIX nfdi4culture: <https://nfdi4culture.de/id/>
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX factgrid: <https://database.factgrid.de/entity/>
+        """
+
+        sparql.setQuery(query_start + """
+                                
+               SELECT ?ontology ?ontoname ?repoLink
+WHERE {
+  ?ontology a <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000023> .
+  OPTIONAL {
+    ?ontology <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000226> ?ontologyTitle .
+    ?ontologyTitle a <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001019> .
+    ?ontologyTitle <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001007> ?ontoname.
+  }
+   OPTIONAL {
+    ?ontology <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000226> ?ontologyRepo .
+    ?ontologyRepo a <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000030> .
+    ?ontologyRepo <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008> ?repoLink.
+  }
+}
+LIMIT 999
+                """
+                )	
+
+
+        try:
+                        ret = sparql.queryAndConvert()
+                        n = len(ret["results"]["bindings"])
+                        
+                        print(str(n) + " ontologies found in MSE KG")
+                        #print(ret["results"]["bindings"])
+                        
+                        for r in ret["results"]["bindings"]:
+                            if "ontoname" in r:
+                                found_names.append(r["ontoname"]["value"])
+                            if "repoLink" in r:
+                                found_repos.append(r["repoLink"]["value"])
+                            else:
+                                found_repos.append(None)  # or handle accordingly
+                                                       
+        except Exception as e:
+                        print(e)
+
+                        
+
+        return [found_names,found_repos]
 #query persons
 def check_MSE_person_existence(first_name,family_name,email,orcid):
         sparql = SPARQLWrapper(

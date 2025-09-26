@@ -110,7 +110,7 @@ def get_first_last_commit(repo):
 
 def extract_license(path):
     try:
-        f = open(path+"\LICENSE", 'r')
+        f = open(path+"\\LICENSE", 'r')
         lic = f.readline()
         return lic.replace('\n', '')
         f.close()
@@ -119,7 +119,7 @@ def extract_license(path):
 
 def extract_readme(path,ai_client):
     try:
-        with open(path+"\README.md", 'r') as file:
+        with open(path+"\\README.md", 'r') as file:
             data = file.read().replace('\n', '')
     except:
         print("No readme!!")
