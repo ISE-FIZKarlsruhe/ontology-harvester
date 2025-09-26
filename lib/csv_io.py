@@ -35,7 +35,7 @@ def create_csv(outname):
         pass
     f = open(outname,'a')
     #line = ("#,title,Link (URL/PID),Link to repository,creator,description")
-    line = ("#,title,Link (URL/PID),Repository address,Link inside repository,creator,license,contact,documentation link,related project, version, module, branch, type,extension, description")
+    line = ("#,title,Link (URL/PID),Repository address,Link inside repository,creator,license,contact,documentation link,related project, version, module, branch, type,extension, description,,")
     f.write(line)
     f.close()
 
