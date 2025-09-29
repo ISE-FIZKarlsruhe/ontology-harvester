@@ -6,7 +6,7 @@ It is designed to support ontology discovery, metadata curation, and repository 
 # Table of Contents  
 
 [How to use](#How-to-use)  
- - [Cloning repositories][1]:
+ - [Cloning repositories][#cloning-repositories-for-scanning]:
  - Extracting Ontologies
  - Creating the template file
  - Asserting the individuals
