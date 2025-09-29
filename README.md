@@ -240,6 +240,6 @@ Contact Point - An agent that serves as a designated interface for communication
 
 Dr. Konstantin Gubaev (Kostiantyn Hubaiev)
 
-ORCID ID: https://orcid.org/0000-0003-2612-8515</br>
-work e-mail: kostiantyn.hubaiev@fiz-karlsruhe.de</br>
-personal e-mail: yamir4eg@gmail.com</br>
+ORCID ID: https://orcid.org/0000-0003-2612-8515 </br>
+work e-mail: kostiantyn.hubaiev@fiz-karlsruhe.de </br>
+personal e-mails: mail@kgubaev.eu, yamir4eg@gmail.com </br>
