@@ -6,7 +6,10 @@ It is designed to support ontology discovery, metadata curation, and repository 
 # Table of Contents  
 
 [How to use](#How-to-use)  
-
+ - Cloning repositories
+ - Extracting Ontologies
+ - Creating the template file
+ - Asserting the individuals
 [Procedure description](#Procedure-description)  
 
 [Ontology metadata scheme based on NFDIcore](#NFDIcore-ontology-metadata)
@@ -31,7 +34,7 @@ python extract_ontologies.py YYY --output_filename ZZZ
 The first argument is mandatory which is the folder with cloned repositories from the previous script. Downloads should be specified by default.</br>
 The second argument is arbitrary and specify the filename with information about the found ontologies. Ontologies.csv is the default name.</br>
 
-### 3. Creatig the ODK robot template file (tsv), for the next step:
+### 3. Creating the ODK robot template file (tsv), for the next step:
 
 ```
 python csv_to_odk.py 
