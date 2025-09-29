@@ -1,4 +1,6 @@
-This is a Python tool to scan GitHub repositories and extract data from the ontology files.
+GitHub Ontology Harvester
+A Python tool to scan GitHub repositories and extract ontology metadata from ontology files.
+It is designed to support ontology discovery, metadata curation, and repository documentation in line with the NFDIcore ontology metadata framework.
 
 # Table of Contents  
 
