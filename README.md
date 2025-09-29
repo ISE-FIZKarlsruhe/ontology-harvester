@@ -6,14 +6,20 @@ It is designed to support ontology discovery, metadata curation, and repository 
 # Table of Contents  
 
 [How to use](#How-to-use)  
- - [Cloning repositories](#cloning-repositories-for-scanning)
- - Extracting Ontologies
+ - Cloning repositories
+ - Extracting ontologies
  - Creating the template file
  - Asserting the individuals
    
 [Procedure description](#Procedure-description)  
+ - Cloning repositories
+ - Scanning repositories for ontology files
+ - Batch scanning
 
-[Ontology metadata scheme based on NFDIcore](#NFDIcore-ontology-metadata)
+[Ontology metadata description with NFDIcore](#NFDIcore-ontology-metadata)
+ - Intro
+ - Describing ontology metadata
+ - Class definitions
 
 [Contact](#Contact)
 
