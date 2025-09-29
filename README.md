@@ -6,7 +6,7 @@ It is designed to support ontology discovery, metadata curation, and repository 
 # Table of Contents  
 
 [How to use](#How-to-use)  
- - [Cloning repositories][#cloning-repositories-for-scanning:]
+ - [Cloning repositories](#cloning-repositories-for-scanning:)
  - Extracting Ontologies
  - Creating the template file
  - Asserting the individuals
@@ -18,7 +18,7 @@ It is designed to support ontology discovery, metadata curation, and repository 
 [Contact](#Contact)
 
 # How to use
-- [Cloning repositories](#cloning-repositories-for-scanning)
+
 ### 1. Cloning repositories for scanning:
 execute the scan_git.py file:
 ```
