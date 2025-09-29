@@ -18,6 +18,7 @@ It is designed to support ontology discovery, metadata curation, and repository 
 [Contact](#Contact)
 
 # How to use
+- [Cloning repositories](#cloning-repositories-for-scanning)
 ### 1. Cloning repositories for scanning:
 execute the scan_git.py file:
 ```
