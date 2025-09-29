@@ -10,6 +10,7 @@ It is designed to support ontology discovery, metadata curation, and repository 
  - Extracting Ontologies
  - Creating the template file
  - Asserting the individuals
+ - 
 [Procedure description](#Procedure-description)  
 
 [Ontology metadata scheme based on NFDIcore](#NFDIcore-ontology-metadata)
